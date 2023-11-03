@@ -17,7 +17,7 @@ const redis = require('redis');
 
 // Render
 const client = redis.createClient({
-  url: 'rediss://red-cl283g2l7jac73fanab0:y7kkC4rMQwB0kw1oZCXjUDvKepwNmw2D@singapore-redis.render.com:6379'
+  url: 'redis://red-cl283g2l7jac73fanab0:6379'
 });
 
 const runRedis = async () => {
@@ -40,9 +40,9 @@ runRedis().catch(err => {
 app.get('/data/:searchtext', async (req, res) => {
   const searchtext = req.params.searchtext;
 
-  console.time('TIMEPROCESS::')
+  console.time('TIMEPROCESS::');
   const result = await client.GET(searchtext);
-  console.timeEnd('TIMEPROCESS::')
+  console.timeEnd('TIMEPROCESS::');
   if (result) {
     console.log('GET');
     return res.status(200).send({
